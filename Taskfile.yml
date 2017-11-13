@@ -1,0 +1,14 @@
+push-ansible-docker:
+  deps: [build-ansible-docker]
+  cmds:
+    - |
+      {{range $ANSIBLE_VER := .ANSIBLE_VERSIONS | splitLines -}}
+      docker push dliappis/ansible:{{$ANSIBLE_VER}}
+      {{end}}
+
+build-ansible-docker:
+  cmds:
+    - |
+      {{range $ANSIBLE_VER := .ANSIBLE_VERSIONS | splitLines -}}
+      docker build -t dliappis/ansible:{{$ANSIBLE_VER}} --build-arg ANSIBLE_VER={{$ANSIBLE_VER}} .
+      {{end}}
