@@ -10,5 +10,5 @@ build-ansible-docker:
   cmds:
     - |
       {{range $ANSIBLE_VER := .ANSIBLE_VERSIONS | splitLines -}}
-      docker build -t dliappis/ansible:{{$ANSIBLE_VER}} --build-arg ANSIBLE_VER={{$ANSIBLE_VER}} .
+      docker build -t dliappis/ansible:{{$ANSIBLE_VER}} --build-arg ANSIBLE_VER={{$ANSIBLE_VER}} --build-arg VAULT_VER={{$.VAULT_VERSION}} .
       {{end}}
